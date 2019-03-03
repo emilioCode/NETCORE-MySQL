@@ -1,0 +1,124 @@
+
+  <div class="input-group">
+      <input type="text" [(ngModel)]="search" class="form-control" placeholder="Filtrar..." aria-label="" aria-describedby="basic-addon1">
+      <div class="input-group-append">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="setNew()">
+              Crear
+            </button>
+      </div>
+    </div>
+    <br/>
+<div >
+    <h3>Fichas</h3>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cedula</th>
+            <th>Ingles</th>
+            <th>Frances</th>
+            <th>Italiano</th>
+            <th>Sexo</th>
+            <th>Direccion</th>
+            <th>Sueldo</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ficha of fichas|filter:search">
+                <td>{{ficha.id}}</td>
+                <td>{{ficha.nombres}}</td>
+                <td>{{ficha.apellidos}}</td>
+                <td>{{ficha.cedula}}</td>
+                <td><span *ngIf="ficha.ingles ==1">SI</span><span *ngIf="ficha.ingles ==0">NO</span></td>
+                <td><span *ngIf="ficha.frances ==1">SI</span><span *ngIf="ficha.frances ==0">NO</span></td>
+                <td><span *ngIf="ficha.italiano ==1">SI</span><span *ngIf="ficha.italiano ==0">NO</span></td>
+                <td>{{ficha.sexo}}</td>
+                <td>{{ficha.direccion}}</td>
+                <td>{{ficha.sueldo}}</td>
+              </tr>
+        </tbody>
+      </table>
+  </div>
+
+
+
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Creando Ficha</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4">
+              <input type="text" class="form-control" [(ngModel)]="nombres" placeholder="Nombres"/>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" [(ngModel)]="apellidos" placeholder="Apellidos"/>
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" [(ngModel)]="cedula" placeholder="Cédula"/>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+              <div class="col-md-6">
+                  <label>Idiomas</label><br/>
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [(ngModel)]="ingles">
+                      <label class="form-check-label" for="inlineCheckbox1">Inglés</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="frances">
+                      <label class="form-check-label" for="inlineCheckbox2">Francés</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="italiano">
+                        <label class="form-check-label" for="inlineCheckbox2">Italiano</label>
+                    </div>
+              </div>
+              <div class="col-md-6"><!--[(ngModel)]="sexo"-->
+                <label>Sexo</label><br/>
+                  <!--<div class="custom-control custom-radio">
+                    <input type="radio"  name="Radiosexo" value="F" id="customRadio1"  class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Femenino</label>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio"  name="Radiosexo" value="M" id="customRadio2"  class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Masculino</label>
+
+                    </div>-->
+                    <input type="radio" [(ngModel)]="sexo" name="sexo" value="M" id="customRadio1"> <label for="customRadio1">Masculino</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <input type="radio" [(ngModel)]="sexo" name="sexo" value="F" id="customRadio2"> <label for="customRadio2">Femenino</label>
+              </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-8">
+                <input type="text" class="form-control" [(ngModel)]="direccion" placeholder="Direccion"/>
+           
+            </div>
+            <div class="col-md-4">
+                <input type="number" min="0" class="form-control" [(ngModel)]="sueldo" placeholder="Sueldo"/>
+           
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="insertFicha()">Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
